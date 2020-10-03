@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 8000;
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-
+// Create HTML GET requests
+// Code below handles when the user visits a page
+// Each case the user is shown a differnt content page
 app.get("/", function(req, res){
     res.sendFile(path.join(__dirname, "/Develop/public/index.html"));
 });
