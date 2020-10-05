@@ -12,22 +12,19 @@ const PORT = process.env.PORT || 8000;
 // Set up middleware to handle data parsing
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "Develop")));
 
 // Create HTML GET requests
 // Code below handles when the user visits a page
 // Each case the user is shown a differnt content page
 app.get("/notes", function(req, res){
-    res.sendFile(path.join(__dirname, "/Develop/public/notes.html"));
+    res.sendFile(path.join(__dirname, "Develop/public/notes.html"));
+    console.log("Path hit!");
 });
 
 app.get("*", function(req, res){
-    res.sendFile(path.join(__dirname, "/Develop/public/index.html"));
+    res.sendFile(path.join(__dirname, "Develop/public/index.html"));
 });
-
-
-// app.get("*", function(req, res){
-//     res.sendFile(path.join(__dirname, "/Develop/public/index.html"))
-// })
 
 
 
