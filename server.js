@@ -37,14 +37,15 @@ app.post('/api/notes', function (req, res) {
 });
 
 app.delete('/api/notes/:id', function(req, res) {
-    console.log(req.params);
-    const dbDelete = require('./db/db.json');
-    // dbDelete.splice(0, 1)
+    let dbDelete = require('./db/db.json');
+    dbDelete = dbDelete.filter(function(note){     
+        return note.id != req.params.id;
+    });
     fs.writeFile('db/db.json', JSON.stringify(dbDelete), function(err) {
         if (err) {
             throw err;
         };
-        res.end();
+        res.json()
     });
 });
 
