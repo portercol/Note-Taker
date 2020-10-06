@@ -25,7 +25,11 @@ app.get("*", function(req, res){
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-
+// Create POST requests
+app.post("/api/notes", function(req, res){
+var note = req.body;
+    res.json(note);
+});
 
 // This code 'starts' the server
 app.listen(PORT, function(){
