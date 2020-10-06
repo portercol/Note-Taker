@@ -18,18 +18,18 @@ app.use(express.json());
 
 // Create GET & POST requests using an API route
 app.get("/api/notes", function (req, res) {
-    const whatever = require('./db/db.json');
-    res.json(whatever)
+    const dbGet = require('./db/db.json');
+    res.json(dbGet)
 });
 
 
 app.post("/api/notes", function (req, res) {
-    const whatever = require('./db/db.json');
-    const myNewNote = req.body;
-    whatever.push(myNewNote);
-    fs.writeFile("db/db.json", JSON.stringify(whatever), (err) => {
+    const dbPost = require('./db/db.json');
+    const noteData = req.body;
+    dbPost.push(noteData);
+    fs.writeFile("db/db.json", JSON.stringify(dbPost), (err) => {
         if (err) {
-            return myNewNote;
+            return noteData;
         }
     });
 });
