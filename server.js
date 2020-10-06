@@ -1,6 +1,7 @@
 // Require express and path modules (npm packages)
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 // Tells node we're creating an express server
 const app = express();
@@ -27,8 +28,11 @@ app.get("*", function(req, res){
 
 // Create POST requests
 app.post("/api/notes", function(req, res){
-var note = req.body;
-    res.json(note);
+// var note = req.body;
+    res.json(req.body);
+
+    // fs.writeFile("db.json", )
+
 });
 
 // This code 'starts' the server
