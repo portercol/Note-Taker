@@ -16,37 +16,39 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-// Create GET & POST requests using an API route
-app.get("/api/notes", function (req, res) {
+// Create GET, POST & DELETE API Routes
+app.get('/api/notes', function (req, res) {
     const dbGet = require('./db/db.json');
-    res.json(dbGet)
+    res.json(dbGet);
 });
 
-
-app.post("/api/notes", function (req, res) {
+app.post('/api/notes', function (req, res) {
     const dbPost = require('./db/db.json');
     const noteData = req.body;
     dbPost.push(noteData);
-    fs.writeFile("db/db.json", JSON.stringify(dbPost), (err) => {
+    fs.writeFile('db/db.json', JSON.stringify(dbPost), function(err) {
         if (err) {
             return noteData;
         }
     });
 });
 
+app.delete('/api/notes', function(req, res) {
+    const dbDelete = require('./db/db.json');
+});
+
 // Create HTML GET requests
 // Code below handles when the user visits a page
 // Each case the user is shown a differnt content page
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "public/notes.html"));
+app.get('/notes', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "public/index.html"));
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 // This code 'starts' the server
 app.listen(PORT, function () {
     console.log("App listening on PORT:" + PORT)
 });
-
