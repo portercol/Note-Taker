@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+// const uniqid = require('uniqid');
 
 // Tells node we're creating an express server
 const app = express();
@@ -25,6 +26,7 @@ app.get('/api/notes', function (req, res) {
 app.post('/api/notes', function (req, res) {
     const dbPost = require('./db/db.json');
     const noteData = req.body;
+    noteData.id = Date.now();
     dbPost.push(noteData);
     fs.writeFile('db/db.json', JSON.stringify(dbPost), function(err) {
         if (err) {
@@ -34,9 +36,10 @@ app.post('/api/notes', function (req, res) {
     });
 });
 
-app.delete('/api/notes:id', function(req, res) {
+app.delete('/api/notes/:id', function(req, res) {
+    console.log(req.params);
     const dbDelete = require('./db/db.json');
-    dbDelete.splice(0, 1)
+    // dbDelete.splice(0, 1)
     fs.writeFile('db/db.json', JSON.stringify(dbDelete), function(err) {
         if (err) {
             throw err;
