@@ -29,14 +29,13 @@ app.get("*", function(req, res){
 
 // Create POST requests
 app.post("/api/notes", function(req, res){
+    const myNewNote = JSON.stringify(req.body);
 
-    // fs.writeFile("/Develop/db/db.json", req.body, (err) => {
-    //     if (err) {
-    //         return err
-    //     }
-    // })
-    // brandNewNote.push(req.body);
-    // res.json(true);
+    fs.writeFile("db/db.json", myNewNote, (err) => {
+        if (err) {
+            return console.log(err);
+        }
+    })
 
 
 });
