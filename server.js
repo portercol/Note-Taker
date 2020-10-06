@@ -28,16 +28,24 @@ app.post('/api/notes', function (req, res) {
     dbPost.push(noteData);
     fs.writeFile('db/db.json', JSON.stringify(dbPost), function(err) {
         if (err) {
-            return noteData;
-        }
+            throw err;
+        };
+        res.json(noteData);
     });
 });
 
-app.delete('/api/notes', function(req, res) {
+app.delete('/api/notes:id', function(req, res) {
     const dbDelete = require('./db/db.json');
+    dbDelete.splice(0, 1)
+    fs.writeFile('db/db.json', JSON.stringify(dbDelete), function(err) {
+        if (err) {
+            throw err;
+        };
+        res.end();
+    });
 });
 
-// Create HTML GET requests
+// Create HTML Routes
 // Code below handles when the user visits a page
 // Each case the user is shown a differnt content page
 app.get('/notes', function (req, res) {
