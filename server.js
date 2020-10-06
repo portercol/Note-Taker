@@ -27,10 +27,11 @@ app.get("*", function(req, res){
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-// Create POST requests
+// Create POST requests using an API route
 app.post("/api/notes", function(req, res){
+// Create var and store JSON.stringify and pass thru req.body
     const myNewNote = JSON.stringify(req.body);
-
+// Use 'fs' to write new file to db.json, passing thru var created above
     fs.writeFile("db/db.json", myNewNote, (err) => {
         if (err) {
             return console.log(err);
