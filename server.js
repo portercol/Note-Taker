@@ -28,7 +28,7 @@ app.post('/api/notes', function (req, res) {
     const noteData = req.body;
     noteData.id = Date.now();
     dbPost.push(noteData);
-    fs.writeFile('db/db.json', JSON.stringify(dbPost), function(err) {
+    fs.writeFile('db/db.json', JSON.stringify(dbPost), function (err) {
         if (err) {
             throw err;
         };
@@ -36,12 +36,12 @@ app.post('/api/notes', function (req, res) {
     });
 });
 
-app.delete('/api/notes/:id', function(req, res) {
+app.delete('/api/notes/:id', function (req, res) {
     let dbDelete = require('./db/db.json');
-    dbDelete = dbDelete.filter(function(note){     
+    dbDelete = dbDelete.filter(function (note) {
         return note.id != req.params.id;
     });
-    fs.writeFile('db/db.json', JSON.stringify(dbDelete), function(err) {
+    fs.writeFile('db/db.json', JSON.stringify(dbDelete), function (err) {
         if (err) {
             throw err;
         };
