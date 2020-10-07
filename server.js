@@ -19,16 +19,16 @@ app.use(express.json());
 
 // Create GET, POST & DELETE API Routes
 app.get('/api/notes', function (req, res) {
-    const dbGet = JSON.parse(fs.readFileSync (dbdata).toString());
+    const dbGet = JSON.parse(fs.readFileSync(dbdata).toString());
     res.json(dbGet);
 });
 
 app.post('/api/notes', function (req, res) {
-    const dbPost = JSON.parse(fs.readFileSync (dbdata).toString());
+    const dbPost = JSON.parse(fs.readFileSync(dbdata).toString());
     const noteData = req.body;
     noteData.id = Date.now();
     dbPost.push(noteData);
-    
+
     fs.writeFile(dbdata, JSON.stringify(dbPost), function (err) {
         if (err) {
             throw err;
@@ -38,7 +38,7 @@ app.post('/api/notes', function (req, res) {
 });
 
 app.delete('/api/notes/:id', function (req, res) {
-    var dbDelete = JSON.parse(fs.readFileSync (dbdata).toString());
+    var dbDelete = JSON.parse(fs.readFileSync(dbdata).toString());
     console.log("this is before filter", dbDelete)
     dbDelete = dbDelete.filter(function (note) {
         console.log("this is after filter", dbDelete)
