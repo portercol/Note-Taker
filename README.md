@@ -11,3 +11,8 @@ Create an application that can be used to write, save, and delete notes. This ap
 
 
 ## Credits/Technologies
+    1. Node.js
+    2. Express.js
+    3. JavaScript
+    4. HTML
+    5. CSS
