@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-// const uniqid = require('uniqid');
+const dbdata = path.join(__dirname, "db", "db.json");
 
 // Tells node we're creating an express server
 const app = express();
@@ -19,12 +19,12 @@ app.use(express.json());
 
 // Create GET, POST & DELETE API Routes
 app.get('/api/notes', function (req, res) {
-    const dbGet = require('./db/db.json');
+    const dbGet = JSON.parse(fs.readFileSync (dbdata).toString());
     res.json(dbGet);
 });
 
 app.post('/api/notes', function (req, res) {
-    const dbPost = require('./db/db.json');
+    const dbPost = JSON.parse(fs.readFileSync (dbdata).toString());
     const noteData = req.body;
     noteData.id = Date.now();
     dbPost.push(noteData);
@@ -37,7 +37,7 @@ app.post('/api/notes', function (req, res) {
 });
 
 app.delete('/api/notes/:id', function (req, res) {
-    var dbDelete = require('./db/db.json');
+    var dbDelete = JSON.parse(fs.readFileSync (dbdata).toString());
     dbDelete = dbDelete.filter(function (note) {
         return note.id != req.params.id;
     });
