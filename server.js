@@ -37,7 +37,7 @@ app.post('/api/notes', function (req, res) {
 });
 
 app.delete('/api/notes/:id', function (req, res) {
-    let dbDelete = require('./db/db.json');
+    var dbDelete = require('./db/db.json');
     dbDelete = dbDelete.filter(function (note) {
         return note.id != req.params.id;
     });
@@ -45,13 +45,12 @@ app.delete('/api/notes/:id', function (req, res) {
         if (err) {
             throw err;
         };
-        res.json()
+        res.json();
     });
 });
 
 // Create HTML Routes
 // Code below handles when the user visits a page
-// Each case the user is shown a differnt content page
 app.get('/notes', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
