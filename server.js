@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const dbdata = path.join(__dirname, "db", "db.json");
+const dbdata = "./db/db.json";
 
 // Tells node we're creating an express server
 const app = express();
@@ -33,23 +33,23 @@ app.post('/api/notes', function (req, res) {
         if (err) {
             throw err;
         };
-        res.json(noteData);
     });
+    res.json(noteData);
 });
 
 app.delete('/api/notes/:id', function (req, res) {
     var dbDelete = JSON.parse(fs.readFileSync(dbdata).toString());
-    console.log("this is before filter", dbDelete)
+    
     dbDelete = dbDelete.filter(function (note) {
-        console.log("this is after filter", dbDelete)
+        
         return note.id != req.params.id;
     });
     fs.writeFile(dbdata, JSON.stringify(dbDelete), function (err) {
         if (err) {
             throw err;
         };
-        res.json();
     });
+    res.json(dbDelete);
 });
 
 // Create HTML Routes
